@@ -35,7 +35,7 @@ def download_url_requests(url):
 def parse_movie_page(url):
 	html = download_url_urllib2(url)
 	#print(len(html))
-	soup = BeautifulSoup(html_index, "html.parser")
+	soup = BeautifulSoup(html, "html.parser")
 	#print(html)
 	#soup.pretify()
 	#print(soup.original_encoding)
@@ -45,7 +45,7 @@ def parse_movie_page(url):
 	for item in movie_urls:
 		movie_name = item.get_text();
 		movie_url = "http://www.dytt8.net"+item.get("href")
-		print amount+1, movie_name
+		print amount+1, movie_name.encode("gb2312")
 		
 		sql_query = "select count(*) from movie_list where movie_name = \"%s\""%(movie_name)
 		#print sql_query
@@ -84,7 +84,7 @@ try:
 
 		
 		page_index += 1
-		sleep_second = random.randint(1,5)
+		sleep_second = random.randint(2,8)
 		print "Sleep: ", sleep_second
 		time.sleep(sleep_second)
 	
